@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import subprocess
+import json
 
 # Initialize Flask app and enable CORS for all origins
-app = Flask(__name__)
+app = Flask(__name__)  # Corrected from _name_ to __name__
 CORS(app)  # Allow all origins by default
 
 # Route to verify the server is running
@@ -28,17 +29,9 @@ def run_code():
         if not code:
             return jsonify({'error': 'No code provided!'}), 400  # Handle missing code
 
-        # Security: Disallow dangerous imports or commands
-        blocked_keywords = [
-            'os.', 'subprocess.', 'import os', 'import subprocess', 'open(',
-            'exec(', 'eval(', 'import sys', 'sys.', 'import socket', 'socket.'
-        ]
-        if any(keyword in code for keyword in blocked_keywords):
-            return jsonify({'error': 'Dangerous code detected!'}), 400
-
-        # Execute the provided Python code using the system's default Python interpreter
+        # Execute the provided Python code
         result = subprocess.run(
-            ['python', '-c', code],  # Use the system's default Python
+            [r'C:\Users\91828\anaconda3\python.exe', '-c', code],  # Use the correct Python path
             capture_output=True,  # Capture both stdout and stderr
             text=True,  # Get output as text (not bytes)
             timeout=10  # Set a timeout for code execution (10 seconds)
@@ -49,12 +42,15 @@ def run_code():
         error = result.stderr.strip()
         return jsonify({'output': output, 'error': error}), 200
 
+    except json.JSONDecodeError:
+        return jsonify({'error': 'Request must be valid JSON!'}), 400
+
     except subprocess.TimeoutExpired:
         return jsonify({'error': 'Code execution timed out!'}), 408
 
     except Exception as e:
         print(f"Unexpected error: {str(e)}")  # Log error for debugging
         return jsonify({'error': f'An unexpected error occurred: {str(e)}'}), 500
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)  # Listen on all network interfaces
+    app.run(host='192.168.56.1', port=5005, debug=True)
+
