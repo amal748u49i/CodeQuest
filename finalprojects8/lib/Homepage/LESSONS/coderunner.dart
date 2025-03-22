@@ -17,8 +17,8 @@ class _CodeRunnerState extends State<CodeRunner> {
 
   Future<void> runCode() async {
     final code = _codeController.text;
-    final Uri url =
-        Uri.parse('http://192.168.56.1:5005/run'); // Replace with server URL
+    final Uri url = Uri.parse(
+        'https://codequest-iuxe.onrender.com/run'); // Replace with server URL
 
     setState(() {
       isLoading = true;
