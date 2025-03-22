@@ -1,4 +1,4 @@
-import 'package:finalprojects8/Homepage/LESSONS/intro.dart';
+import 'package:finalprojects8/LESSONS/intro.dart';
 import 'package:finalprojects8/Homepage/auth_page.dart';
 import 'package:finalprojects8/Homepage/loginpage.dart';
 import 'package:finalprojects8/Homepage/signup.dart';

@@ -3,7 +3,7 @@ import 'package:finalprojects8/Homepage/Advanced.dart';
 import 'package:finalprojects8/Homepage/Intermediate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:finalprojects8/Homepage/LESSONS/quizpage.dart';
+import 'package:finalprojects8/HoLESSONS/quizpage.dart';
 import 'package:finalprojects8/Homepage/login_register.dart';
 import 'lessons/syntax.dart';
 import 'lessons/Datatypes.dart';
